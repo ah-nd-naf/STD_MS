@@ -1,4 +1,4 @@
-const { Pool } = require("pg");
+const { Pool } = require("pg"); // pool hepls app to handle multiple database requests at once
 require("dotenv").config();
 
 const pool = new Pool({
