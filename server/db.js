@@ -1,26 +1,15 @@
-const { Pool } = require("pg"); // pool hepls app to handle multiple database requests at once
+const { Pool } = require('pg');
+const { PrismaPg } = require('@prisma/adapter-pg');
+const { PrismaClient } = require('@prisma/client');
 require("dotenv").config();
 
-const pool = new Pool({
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_DATABASE,
+// 1. Create a standard PG pool using your Neon URL
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
-});
+// 2. Wrap it in the Prisma Adapter
+const adapter = new PrismaPg(pool);
 
-// testing if it works
+// 3. Pass the adapter to Prisma
+const prisma = new PrismaClient({ adapter });
 
-pool.connect((err, client, release) => {
-    if (err) {
-        return console.error('Error acquiring client', err.stack);
-    }
-    console.log("Database connected successfully");
-    release();
-});
-
-module.exports = pool;
-
-
-
+module.exports = prisma;

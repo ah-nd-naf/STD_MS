@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider  = "postgresql"
+}
+model User {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique @db.VarChar(255)
+  password   String    @db.VarChar(255)
+  role       String?   @default("student") @db.VarChar(50)
+  otp        String?   @db.VarChar(6)
+  otpExpiry  DateTime? @map("otp_expiry") @db.Timestamp()
+  isVerified Boolean?  @default(false) @map("is_verified")
+  createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamp()
+
+  @@map("users") // This ensures Prisma looks for the lowercase "users" table in the database
+}
