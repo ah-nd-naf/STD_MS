@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
 
 function App() {
   // Add 'logout' here so we can use it in the dashboard
@@ -20,6 +21,7 @@ function App() {
         {/* Public Routes: Redirect to dashboard if already logged in */}
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
         <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/dashboard" />} />
+        <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
 
         {/* Temporary Dashboard Route with Styling */}
         <Route 

@@ -17,6 +17,7 @@ router.get("/profile", verifyToken, async (req, res) => {
                 id: true,
                 email: true,
                 role: true,
+                isVerified: true,
                 createdAt: true
                 // excluded the pass & OTP section for security
             }
