@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -75,6 +76,9 @@ const Signup = () => {
             </button>
           </form>
         )}
+
+        <p className = "text-gray-400 mt-4 text-center">
+            Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Log In</Link></p>
 
         {message && (
           <p className={`mt-4 text-center ${message.includes("successful") || message.includes("verified") ? "text-green-400" : "text-red-400"}`}>
