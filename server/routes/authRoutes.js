@@ -7,7 +7,7 @@ const sendMail = require("../utils/sendEmail");
 
 // Signup Route
 router.post("/signup", async (req, res) => {
-    const { email, password, role } = req.body;
+    const { email, password, name, role } = req.body;
 
     try {
         // 1. Check if user exists
@@ -29,6 +29,7 @@ router.post("/signup", async (req, res) => {
             data: {
                 email: email,
                 password: hashedPassword,
+                name: name,
                 role: role || "student",
                 otp: otp,
                 otpExpiry: otpExpiry
